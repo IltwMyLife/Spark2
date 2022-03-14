@@ -1,0 +1,109 @@
+#pragma once
+
+////////////////////////////////////////////////////////////
+// Headers
+////////////////////////////////////////////////////////////
+#include <Spark/Window/WindowImpl.hpp>
+#include <Windows.h>
+
+////////////////////////////////////////////////////////////
+/// \brief Win32 window implementation
+///
+////////////////////////////////////////////////////////////
+class WindowImplWin32 final : public WindowImpl
+{
+public:
+
+	////////////////////////////////////////////////////////////
+	/// \brief Default constructor
+	///
+	/// This constructor doesn't actually create the window,
+	/// use the other constructors or call create() to do so.
+	///
+	////////////////////////////////////////////////////////////
+	WindowImplWin32();
+
+	////////////////////////////////////////////////////////////
+	/// \brief Create win32 window implementation
+	///
+	/// \param title  Title of the window
+	/// \param width  Width of the window
+	/// \param height Height of the window
+	///
+	////////////////////////////////////////////////////////////
+	WindowImplWin32(std::string title, uint32_t width, uint32_t height);
+
+	////////////////////////////////////////////////////////////
+	/// \brief Destructor
+	///
+	/// Destroy win32 window implementation.
+	///
+	////////////////////////////////////////////////////////////
+	~WindowImplWin32() override;
+
+public:
+
+	////////////////////////////////////////////////////////////
+	/// \brief Create window
+	/// 
+	/// Create window.
+	///
+	/// \param title  Title of the window
+	/// \param width  Width of the window
+	/// \param height Height of the window
+	///
+	////////////////////////////////////////////////////////////
+	void create(std::string title, uint32_t width, uint32_t height) override;
+
+	////////////////////////////////////////////////////////////
+	/// \brief Destroy window
+	///
+	/// Destroy window.
+	///
+	////////////////////////////////////////////////////////////
+	void destroy() override;
+
+	////////////////////////////////////////////////////////////
+	/// \brief Proccess messages
+	/// 
+	/// Proccess messages.
+	///
+	////////////////////////////////////////////////////////////
+	void processMessages() override;
+
+	////////////////////////////////////////////////////////////
+	/// \brief Tell whether or not the window is open
+	///
+	/// \return True if the window is open, false if it has been closed.
+	///
+	////////////////////////////////////////////////////////////
+	bool isOpen() override;
+
+private:
+
+	////////////////////////////////////////////////////////////
+	/// \brief Function called whenever one of our windows receives a message
+	///
+	/// \param hWnd   Handle of the window
+	/// \param uMsg   Message received
+	/// \param wParam First parameter of the message
+	/// \param lParam Second parameter of the message
+	///
+	/// \return True to discard the event after it has been processed
+	///
+	////////////////////////////////////////////////////////////
+	static LRESULT CALLBACK globalOnEvent(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+
+private:
+
+	////////////////////////////////////////////////////////////
+	// Member data
+	////////////////////////////////////////////////////////////
+	HINSTANCE	m_hInstance; //!< Handle instance
+	HWND		m_hWnd;	     //!< Window handle
+	LPCSTR		m_className; //!< Window class name
+	std::string m_title;     //!< Window title
+	uint32_t	m_width;     //!< Window width
+	uint32_t	m_height;    //!< Window height
+	bool		m_isOpen;    //!< Window is open?
+};
