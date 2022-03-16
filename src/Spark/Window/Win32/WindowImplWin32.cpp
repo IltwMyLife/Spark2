@@ -6,6 +6,7 @@
 ////////////////////////////////////////////////////////////
 WindowImplWin32::WindowImplWin32()
 {
+
 	m_isOpen = false;
 }
 
@@ -18,18 +19,18 @@ WindowImplWin32::WindowImplWin32(std::string title, uint32_t width, uint32_t hei
 ////////////////////////////////////////////////////////////
 WindowImplWin32::~WindowImplWin32()
 {
+	destroy();
 }
 
 ////////////////////////////////////////////////////////////
 void WindowImplWin32::create(std::string title, uint32_t width, uint32_t height)
 {
-	m_title = std::move(title);
-	m_width = width;
+	m_title	 = std::move(title);
+	m_width	 = width;
 	m_height = height;
 
 	m_hInstance = GetModuleHandle(nullptr);
-
-	m_className = "Spark";
+	m_className = m_title.c_str();
 
 	WNDCLASS wndClass	   = {};
 	wndClass.lpszClassName = m_className;
@@ -56,21 +57,22 @@ void WindowImplWin32::destroy()
 }
 
 ////////////////////////////////////////////////////////////
-void WindowImplWin32::processMessages()
+bool WindowImplWin32::processMessages()
 {
 	MSG msg = {};
 
-	while (PeekMessage(&msg, nullptr, 0u, 0u, PM_REMOVE))
-	{
-		if (msg.message == WM_QUIT) m_isOpen = false;
+	bool result = PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE);
 
-		TranslateMessage(&msg);
-		DispatchMessage(&msg);
-	}
+	if (msg.message == WM_QUIT) m_isOpen = false;
+
+	TranslateMessage(&msg);
+	DispatchMessage(&msg);
+
+	return result;
 }
 
 ////////////////////////////////////////////////////////////
-bool WindowImplWin32::isOpen()
+bool WindowImplWin32::isOpen() const
 {
 	return m_isOpen;
 }

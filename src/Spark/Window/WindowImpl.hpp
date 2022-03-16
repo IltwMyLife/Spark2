@@ -6,7 +6,7 @@
 #include <string>
 
 ////////////////////////////////////////////////////////////
-/// \brief Abstract base class of window implementation
+/// \brief Abstract base class of Window implementation
 ///
 ////////////////////////////////////////////////////////////
 class WindowImpl
@@ -34,8 +34,8 @@ public:
 
 	////////////////////////////////////////////////////////////
 	/// \brief Destructor
-	///
-	/// Destroy window.
+	/// 
+	/// Closes the window and frees all the resources attached to it.
 	///
 	////////////////////////////////////////////////////////////
 	virtual ~WindowImpl() = default;
@@ -44,8 +44,6 @@ public:
 
 	////////////////////////////////////////////////////////////
 	/// \brief Create window
-	///
-	/// Create window.
 	///
 	/// \param title Title of the window
 	/// \param width Width of the window
@@ -57,18 +55,18 @@ public:
 	////////////////////////////////////////////////////////////
 	/// \brief Destroy window
 	///
-	/// Destroy window.
-	///
+	///	Close the window and destroy all the attached resources.
+	/// 
 	////////////////////////////////////////////////////////////
 	virtual void destroy() = 0;
 
 	////////////////////////////////////////////////////////////
 	/// \brief Proccess messages
 	///
-	/// Proccess messages.
-	/// 
+	/// \return True if have another message.
+	///
 	////////////////////////////////////////////////////////////
-	virtual void processMessages() = 0;
+	virtual bool processMessages() = 0;
 
 	////////////////////////////////////////////////////////////
 	/// \brief Tell whether or not the window is open
@@ -76,5 +74,5 @@ public:
 	/// \return True if the window is open, false if it has been closed.
 	///
 	////////////////////////////////////////////////////////////
-	virtual bool isOpen() = 0;
+	virtual bool isOpen() const = 0;
 };

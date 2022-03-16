@@ -49,8 +49,6 @@ public:
 	////////////////////////////////////////////////////////////
 	/// \brief Create window
 	///
-	/// Create window.
-	///
 	/// \param title Title of the window
 	/// \param width Width of the window
 	/// \param height Height of the window
@@ -61,7 +59,7 @@ public:
 	////////////////////////////////////////////////////////////
 	/// \brief Destroy window
 	///
-	/// Destroy window.
+	/// Close the window and destroy all the attached resources.
 	///
 	////////////////////////////////////////////////////////////
 	void destroy();
@@ -69,10 +67,10 @@ public:
 	////////////////////////////////////////////////////////////
 	/// \brief Proccess messages
 	///
-	/// Proccess messages.
-	/// 
+	/// \return True if have another message.
+	///
 	////////////////////////////////////////////////////////////
-	void processMessages();
+	bool processMessages();
 
 	////////////////////////////////////////////////////////////
 	/// \brief Tell whether or not the window is open
@@ -80,7 +78,7 @@ public:
 	/// \return True if the window is open, false if it has been closed.
 	///
 	////////////////////////////////////////////////////////////
-	bool isOpen();
+	bool isOpen() const;
 
 private:
 	

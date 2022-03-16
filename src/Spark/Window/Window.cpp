@@ -42,13 +42,13 @@ void Window::destroy()
 }
 
 ////////////////////////////////////////////////////////////
-void Window::processMessages()
+bool Window::processMessages()
 {
-	m_impl->processMessages();
+	return m_impl->processMessages();
 }
 
 ////////////////////////////////////////////////////////////
-bool Window::isOpen()
+bool Window::isOpen() const
 {
 	return m_impl->isOpen();
 }

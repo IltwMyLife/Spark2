@@ -7,7 +7,7 @@
 #include <Windows.h>
 
 ////////////////////////////////////////////////////////////
-/// \brief Win32 window implementation
+/// \brief Win32 WindowImpl
 ///
 ////////////////////////////////////////////////////////////
 class WindowImplWin32 final : public WindowImpl
@@ -17,14 +17,14 @@ public:
 	////////////////////////////////////////////////////////////
 	/// \brief Default constructor
 	///
-	/// This constructor doesn't actually create the window,
+	/// This constructor doesn't actually window,
 	/// use the other constructors or call create() to do so.
 	///
 	////////////////////////////////////////////////////////////
 	WindowImplWin32();
 
 	////////////////////////////////////////////////////////////
-	/// \brief Create win32 window implementation
+	/// \brief Constructor create window
 	///
 	/// \param title  Title of the window
 	/// \param width  Width of the window
@@ -36,7 +36,7 @@ public:
 	////////////////////////////////////////////////////////////
 	/// \brief Destructor
 	///
-	/// Destroy win32 window implementation.
+	/// Closes the window and frees all the resources attached to it.
 	///
 	////////////////////////////////////////////////////////////
 	~WindowImplWin32() override;
@@ -46,8 +46,6 @@ public:
 	////////////////////////////////////////////////////////////
 	/// \brief Create window
 	/// 
-	/// Create window.
-	///
 	/// \param title  Title of the window
 	/// \param width  Width of the window
 	/// \param height Height of the window
@@ -58,7 +56,7 @@ public:
 	////////////////////////////////////////////////////////////
 	/// \brief Destroy window
 	///
-	/// Destroy window.
+	/// Close the window and destroy all the attached resources.
 	///
 	////////////////////////////////////////////////////////////
 	void destroy() override;
@@ -66,10 +64,10 @@ public:
 	////////////////////////////////////////////////////////////
 	/// \brief Proccess messages
 	/// 
-	/// Proccess messages.
+	/// \return True if have another message.
 	///
 	////////////////////////////////////////////////////////////
-	void processMessages() override;
+	bool processMessages() override;
 
 	////////////////////////////////////////////////////////////
 	/// \brief Tell whether or not the window is open
@@ -77,7 +75,7 @@ public:
 	/// \return True if the window is open, false if it has been closed.
 	///
 	////////////////////////////////////////////////////////////
-	bool isOpen() override;
+	bool isOpen() const override;
 
 private:
 

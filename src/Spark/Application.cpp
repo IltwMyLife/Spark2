@@ -17,5 +17,8 @@ Application::~Application()
 ////////////////////////////////////////////////////////////
 void Application::run()
 {
-	while (m_window.isOpen()) m_window.processMessages(); 
+	while (m_window.isOpen())
+	{
+		while (m_window.processMessages()) {}
+	}
 }
