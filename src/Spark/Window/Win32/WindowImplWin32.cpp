@@ -6,12 +6,11 @@
 ////////////////////////////////////////////////////////////
 WindowImplWin32::WindowImplWin32()
 {
-
 	m_isOpen = false;
 }
 
 ////////////////////////////////////////////////////////////
-WindowImplWin32::WindowImplWin32(std::string title, uint32_t width, uint32_t height)
+WindowImplWin32::WindowImplWin32(std::string title, uint32_t width, uint32_t height) 
 {
 	create(std::move(title), width, height);
 }
@@ -25,6 +24,9 @@ WindowImplWin32::~WindowImplWin32()
 ////////////////////////////////////////////////////////////
 void WindowImplWin32::create(std::string title, uint32_t width, uint32_t height)
 {
+	m_vulkanExtensions.emplace_back("VK_KHR_surface");
+	m_vulkanExtensions.emplace_back("VK_KHR_win32_surface");
+
 	m_title	 = std::move(title);
 	m_width	 = width;
 	m_height = height;

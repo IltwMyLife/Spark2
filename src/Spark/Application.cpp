@@ -4,9 +4,10 @@
 #include "Spark/Application.hpp"
 
 ////////////////////////////////////////////////////////////
-Application::Application()
+Application::Application() : m_renderer(Renderer::API::Vulkan)
 {
 	m_window.create("Spark", 800, 600);
+	m_renderer.create(m_window);
 }
 
 ////////////////////////////////////////////////////////////

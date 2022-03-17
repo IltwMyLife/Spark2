@@ -1,4 +1,5 @@
 add_subdirectory(Window)
+add_subdirectory(Renderer)
 
 set(INCROOT ${CMAKE_SOURCE_DIR}/include/${PROJECT_NAME})
 set(SRCROOT ${CMAKE_SOURCE_DIR}/src/${PROJECT_NAME})
@@ -16,4 +17,4 @@ set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 20)
 
 target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_SOURCE_DIR}/include)
 
-target_link_libraries(${PROJECT_NAME} PRIVATE spark-window)
+target_link_libraries(${PROJECT_NAME} PRIVATE spark-window spark-renderer)

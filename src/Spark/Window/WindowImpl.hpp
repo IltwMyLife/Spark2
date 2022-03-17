@@ -23,7 +23,7 @@ public:
 	WindowImpl() = default;
 
 	////////////////////////////////////////////////////////////
-	/// \brief Create window implementation
+	/// \brief Create window
 	///
 	/// \param title  Title of the window
 	/// \param width  Width of the window

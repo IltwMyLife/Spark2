@@ -4,6 +4,8 @@
 // Headers
 ////////////////////////////////////////////////////////////
 #include <Spark/Window/WindowImpl.hpp>
+#include <string>
+#include <vector>
 #include <Windows.h>
 
 ////////////////////////////////////////////////////////////
@@ -97,11 +99,12 @@ private:
 	////////////////////////////////////////////////////////////
 	// Member data
 	////////////////////////////////////////////////////////////
-	HINSTANCE	m_hInstance; //!< Handle instance
-	HWND		m_hWnd;	     //!< Window handle
-	LPCSTR		m_className; //!< Window class name
-	std::string m_title;     //!< Window title
-	uint32_t	m_width;     //!< Window width
-	uint32_t	m_height;    //!< Window height
-	bool		m_isOpen;    //!< Window is open?
+	HINSTANCE				 m_hInstance;        //!< Handle instance
+	HWND					 m_hWnd;	         //!< Window handle
+	LPCSTR					 m_className;        //!< Window class name
+	std::string				 m_title;            //!< Window title
+	uint32_t				 m_width;            //!< Window width
+	uint32_t				 m_height;           //!< Window height
+	bool					 m_isOpen;           //!< Window is open?
+	std::vector<std::string> m_vulkanExtensions; //!< Vulkan Extensions
 };

@@ -3,87 +3,93 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include <string>
-
-class WindowImpl;
+#include <Spark/Renderer/RendererImpl.hpp>
+#include <vector>
+#include <vulkan/vulkan.hpp>
 
 ////////////////////////////////////////////////////////////
-/// \brief Window
+/// \brief Vulkan RendererImpl
 ///
 ////////////////////////////////////////////////////////////
-class Window
+class RendererImplVulkan final : public RendererImpl
 {
 public:
-	
+
 	////////////////////////////////////////////////////////////
 	/// \brief Default constructor
 	///
-	/// This constructor doesn't actually create the window,
+	/// This constructor doesn't actually create the renderer,
 	/// use the other constructors or call create() to do so.
 	///
 	////////////////////////////////////////////////////////////
-	Window();
+	RendererImplVulkan();
 
 	////////////////////////////////////////////////////////////
-	/// \brief Constructor
-	/// 
-	/// Create window.
+	/// \brief Create renderer
 	///
-	/// \param title  Title of the window
-	/// \param width  Width of the window
-	/// \param height Height of the window
+	/// \param window Window
 	///
 	////////////////////////////////////////////////////////////
-	Window(std::string title, uint32_t width, uint32_t height);
+	RendererImplVulkan(const Window& window);
 
 	////////////////////////////////////////////////////////////
 	/// \brief Destructor
 	///
-	/// Destroy window.
+	/// Destroy renderer.
 	///
 	////////////////////////////////////////////////////////////
-	~Window();
+	~RendererImplVulkan() override;
 
 public:
-	
-	////////////////////////////////////////////////////////////
-	/// \brief Create window
-	///
-	/// \param title Title of the window
-	/// \param width Width of the window
-	/// \param height Height of the window
-	///
-	////////////////////////////////////////////////////////////
-	void create(std::string title, uint32_t width, uint32_t height);
 
 	////////////////////////////////////////////////////////////
-	/// \brief Destroy window
+	/// \brief Create renderer
 	///
-	/// Close window and destroy all the attached resources.
-	///
-	////////////////////////////////////////////////////////////
-	void destroy();
-
-	////////////////////////////////////////////////////////////
-	/// \brief Proccess messages
-	///
-	/// \return True if have another message.
+	/// \param window Window
 	///
 	////////////////////////////////////////////////////////////
-	bool processMessages();
-
-	////////////////////////////////////////////////////////////
-	/// \brief Tell whether or not the window is open
-	///
-	/// \return True if the window is open, false if it has been closed.
-	///
-	////////////////////////////////////////////////////////////
-	bool isOpen() const;
+	void create(const Window& window) override;
 
 private:
-	
+
+	////////////////////////////////////////////////////////////
+	/// \brief Create instance
+	///
+	/// Create VkInstance - vulkan handle.
+	///
+	////////////////////////////////////////////////////////////
+	void createInstance();
+
+	////////////////////////////////////////////////////////////
+	/// \brief Check validation layres support
+	///
+	/// \return Validation layers available?
+	///
+	////////////////////////////////////////////////////////////
+	bool checkValidationLayerSupport();
+
+	////////////////////////////////////////////////////////////
+	/// \brief Populate debug messenger create info
+	///
+	////////////////////////////////////////////////////////////
+	void populateDebugMessengerCreateInfo(VkDebugUtilsMessengerCreateInfoEXT& createInfo);
+
+	////////////////////////////////////////////////////////////
+	/// \brief Debug callback
+	/// 
+	/// Print vulkan errors
+	///
+	////////////////////////////////////////////////////////////
+	static VKAPI_ATTR VkBool32 VKAPI_CALL debugCallback(VkDebugUtilsMessageSeverityFlagBitsEXT		messageSeverity,
+														VkDebugUtilsMessageTypeFlagsEXT				messageType,
+														const VkDebugUtilsMessengerCallbackDataEXT* pCallbackData,
+														void*										pUserData);
+
+private:
+
 	////////////////////////////////////////////////////////////
 	// Member data
 	////////////////////////////////////////////////////////////
-	WindowImpl* m_impl; //!< Window implementation 
+	std::vector<const char*> m_validationLayers; // Validation layers for debugging vulkan
+	VkInstance				 m_instance;		 //!< Vulkan handle
 };
